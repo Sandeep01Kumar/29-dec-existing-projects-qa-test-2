@@ -586,11 +586,8 @@ const startServer = () => {
   }
 };
 
-// Start the server
-startServer();
-
 // =============================================================================
-// MODULE EXPORTS (for testing purposes)
+// MODULE EXPORTS AND CONDITIONAL SERVER START
 // =============================================================================
 
 /**
@@ -599,3 +596,14 @@ startServer();
  * without starting the actual server.
  */
 module.exports = app;
+
+/**
+ * Only start the server when this file is run directly (not imported).
+ * This allows the app to be imported for testing without starting listeners.
+ * 
+ * When run directly: node server.js - starts the server
+ * When imported: require('./server') - only exports the app
+ */
+if (require.main === module) {
+  startServer();
+}
