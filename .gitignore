@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Environment files (contains secrets)
+.env
+.env.local
+.env.*.local
+
+# TLS Certificates (security-sensitive)
+# Development certificates should be regenerated locally
+certs/*.key
+certs/*.crt
+certs/*.pem
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# Coverage reports
+coverage/
