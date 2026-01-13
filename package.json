@@ -4,7 +4,15 @@
     "description": "Hello world in Node.js",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node server.js",
+        "test": "jest --detectOpenHandles --forceExit"
+    },
+    "dependencies": {
+        "express": "^5.2.1"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.1.0"
     },
     "author": "hxu",
     "license": "MIT"
