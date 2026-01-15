@@ -58,26 +58,42 @@ let server = null;
  * @returns {http.Server} The server instance
  */
 function startServer(callback) {
-  server = app.listen(port, hostname, () => {
+  server = app.listen(port, hostname);
+  
+  server.on('listening', () => {
     console.log(`Server running at http://${hostname}:${port}/`);
     if (callback) {
       callback(server);
     }
   });
+  
+  server.on('error', (err) => {
+    console.error('Server error:', err.message);
+  });
+  
   return server;
 }
 
 /**
  * Stops the Express server gracefully
+ * Waits for all connections to close and allows time for port release
  * 
  * @param {Function} [callback] - Optional callback function called when server is closed
  */
 function stopServer(callback) {
   if (server) {
+    // Close all active connections if available (Node 18.2+)
+    if (typeof server.closeAllConnections === 'function') {
+      server.closeAllConnections();
+    }
+    
     server.close((err) => {
       server = null;
+      
       if (callback) {
-        callback(err);
+        // Small delay to allow OS to fully release the port
+        // This is necessary for rapid stop/start cycles in tests
+        setTimeout(() => callback(err), 50);
       }
     });
   } else if (callback) {
