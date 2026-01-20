@@ -202,9 +202,10 @@ describe('Express.js Server', () => {
     });
 
     describe('X-Powered-By Header', () => {
-      it('should return X-Powered-By header indicating Express', async () => {
+      it('should NOT expose X-Powered-By header (security hardening)', async () => {
         const response = await request(app).get('/');
-        expect(response.headers['x-powered-by']).toBe('Express');
+        // Helmet removes X-Powered-By header to prevent technology fingerprinting
+        expect(response.headers['x-powered-by']).toBeUndefined();
       });
     });
 

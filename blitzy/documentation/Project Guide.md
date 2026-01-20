@@ -1,36 +1,26 @@
-# Project Guide: Express.js Integration for Node.js Tutorial
+# Project Guide: Express.js Security Hardening
 
 ## Executive Summary
 
-**Project Completion: 95% (9 hours completed out of 9.5 total hours)**
+**Project Completion: 79% (23 hours completed out of 29 total hours)**
 
-This project successfully integrates Express.js framework into an existing Node.js tutorial server and adds a new HTTP endpoint. All core requirements from the Agent Action Plan have been implemented and validated.
+This project successfully implements comprehensive security hardening for an Express.js Hello World application. All 10 in-scope files have been completed, all 111 tests pass (100%), and npm audit shows 0 vulnerabilities. The application is functionally complete with security middleware integrated and tested.
 
 ### Key Achievements
-- ✅ Express.js 5.2.1 installed as production dependency
-- ✅ Server refactored from native `http` module to Express.js
-- ✅ Root endpoint (`GET /`) preserved with "Hello, World!\n" response
-- ✅ New endpoint (`GET /evening`) added returning "Good evening"
-- ✅ Comprehensive test suite with 79 passing tests (100% pass rate)
-- ✅ Documentation updated with endpoint information
-- ✅ Zero security vulnerabilities
+- ✅ Helmet.js security headers (13 headers) integrated
+- ✅ CORS policy with restrictive defaults configured
+- ✅ Rate limiting (100 requests/15 min) enabled
+- ✅ express-validator available for future input validation
+- ✅ All 79 original tests continue to pass
+- ✅ 32 new security tests added and passing
+- ✅ Environment-based configuration for all security features
+- ✅ Comprehensive documentation updated
 
-### Hours Breakdown
-- **Completed Work**: 9 hours
-  - Express.js setup and configuration: 0.5h
-  - Server.js refactoring with testability: 2.5h
-  - Comprehensive test suite development: 4h
-  - README documentation: 0.5h
-  - Git/package configuration: 0.5h
-  - Testing and validation: 1h
-- **Remaining Work**: 0.5 hours
-  - Fix Jest version mismatch in package.json
-
-```mermaid
-pie title Project Hours Breakdown
-    "Completed Work" : 9
-    "Remaining Work" : 0.5
-```
+### Remaining Work (6 hours)
+- SSL certificate setup for HTTPS enablement
+- Production environment configuration
+- Final security review
+- CI/CD pipeline setup (optional)
 
 ---
 
@@ -39,51 +29,89 @@ pie title Project Hours Breakdown
 ### Test Execution Results
 | Metric | Value |
 |--------|-------|
-| Total Tests | 79 |
-| Passed | 79 |
-| Failed | 0 |
-| Pass Rate | 100% |
-| Test Framework | Jest 29.7.0 + Supertest 7.1.0 |
-| Execution Time | ~1.1 seconds |
+| Total Test Suites | 2 |
+| Total Tests | 111 |
+| Tests Passed | 111 (100%) |
+| Tests Failed | 0 |
+| Original Tests | 79 (all passing) |
+| New Security Tests | 32 (all passing) |
 
-### Test Coverage Categories
-- **HTTP Responses**: Response content for all endpoints
-- **Status Codes**: 200 OK for valid routes, 404 for invalid
-- **Response Headers**: Content-Type, Content-Length, ETag, X-Powered-By
-- **Server Lifecycle**: Startup/shutdown programmatic control
-- **Error Handling**: 404 responses, invalid HTTP methods
-- **Edge Cases**: URL variations, query parameters, concurrent requests
+### Security Audit
+| Check | Status |
+|-------|--------|
+| npm audit | 0 vulnerabilities |
+| Dependencies added | 4 (all secure) |
+| Security headers | 13 headers configured |
+| X-Powered-By | Removed ✓ |
 
 ### Runtime Validation
-| Endpoint | Response | Status |
-|----------|----------|--------|
-| `GET /` | `Hello, World!\n` | ✅ 200 OK |
-| `GET /evening` | `Good evening` | ✅ 200 OK |
-| `GET /invalid` | HTML error | ✅ 404 Not Found |
+| Endpoint | Status | Response |
+|----------|--------|----------|
+| GET / | 200 OK | "Hello, World!\n" |
+| GET /evening | 200 OK | "Good evening" |
+| GET /nonexistent | 404 | Not Found |
+| Security headers | Present | All 13 Helmet headers |
+| Rate limit headers | Present | RateLimit header |
 
-### Dependency Audit
-- **Security Vulnerabilities**: 0
-- **Production Dependencies**: express@5.2.1
-- **Dev Dependencies**: jest@29.7.0, supertest@7.1.0
+---
+
+## Project Hours Breakdown
+
+### Completed Work (23 hours)
+
+| Component | Hours | Description |
+|-----------|-------|-------------|
+| Security Middleware Integration | 8 | Helmet, CORS, rate limiting in server.js |
+| Configuration Modules | 4 | 3 config files (security, cors, rateLimit) |
+| Security Test Suite | 5 | 32 tests covering all security features |
+| Documentation | 2 | README updates, .env.example |
+| Dependency Management | 2 | package.json, compatibility verification |
+| Validation & Bug Fixes | 2 | Test compatibility, runtime verification |
+
+### Remaining Work (6 hours)
+
+| Task | Hours | Priority | Description |
+|------|-------|----------|-------------|
+| SSL Certificate Setup | 2.0 | Medium | Generate/obtain certs, configure paths |
+| Production Env Config | 1.5 | Medium | Set CORS_ORIGINS, rate limits for prod |
+| Final Security Review | 1.0 | High | Audit CSP, validate all headers |
+| CI/CD Pipeline | 1.5 | Low | GitHub Actions setup (optional) |
+
+### Visual Representation
+
+```mermaid
+pie title Project Hours Breakdown
+    "Completed Work" : 23
+    "Remaining Work" : 6
+```
+
+**Completion Calculation**: 23 hours completed / (23 completed + 6 remaining) = 23/29 = **79.3% complete**
 
 ---
 
 ## Files Modified/Created
 
-| File | Action | Description |
-|------|--------|-------------|
-| `server.js` | Modified | Refactored from http module to Express.js with testability |
-| `server.test.js` | Created | 661 lines, 79 comprehensive unit tests |
-| `package.json` | Modified | Added Express.js and test dependencies |
-| `package-lock.json` | Modified | Regenerated with all dependencies |
-| `README.md` | Modified | Updated with Express.js documentation |
-| `.gitignore` | Created | Excludes node_modules directory |
+### Git Commit Summary
+- **Branch**: blitzy-7b42a390-62a1-4363-a68c-29376de5c3f4
+- **Commits**: 2 (1 security hardening, 1 package-lock update)
+- **Files Changed**: 10
+- **Lines Added**: 580 (excluding package-lock.json regeneration)
+- **Lines Removed**: 5
 
-### Git Statistics
-- **Commits**: 8
-- **Lines Added**: 7,062
-- **Lines Removed**: 11
-- **Net Change**: +7,051 lines
+### File Inventory
+
+| File | Status | Lines | Description |
+|------|--------|-------|-------------|
+| package.json | Updated | +5 | Added 4 security dependencies |
+| server.js | Updated | +43 | Security middleware chain |
+| config/security.js | Created | 47 | Master security toggle, HTTPS config |
+| config/cors.js | Created | 70 | CORS policy configuration |
+| config/rateLimit.js | Created | 78 | Rate limiting settings |
+| tests/security/security.test.js | Created | 214 | 32 security verification tests |
+| server.test.js | Updated | +3/-2 | X-Powered-By test update |
+| .env.example | Created | 50 | Environment variable template |
+| README.md | Updated | +70 | Security documentation section |
+| package-lock.json | Regenerated | - | Dependency tree updated |
 
 ---
 
@@ -91,11 +119,11 @@ pie title Project Hours Breakdown
 
 ### System Prerequisites
 
-| Requirement | Version | Status |
-|-------------|---------|--------|
-| Node.js | v18.0.0 or higher | ✅ v20.19.6 installed |
-| npm | v7.0.0 or higher | ✅ v11.1.0 installed |
-| Operating System | macOS, Linux, or Windows | Any |
+| Requirement | Version | Verification Command |
+|-------------|---------|---------------------|
+| Node.js | 18.x or higher (20.x recommended) | `node --version` |
+| npm | 8.x or higher | `npm --version` |
+| Operating System | Linux, macOS, or Windows | - |
 
 ### Environment Setup
 
@@ -103,161 +131,232 @@ pie title Project Hours Breakdown
 ```bash
 git clone <repository-url>
 cd <repository-directory>
+git checkout blitzy-7b42a390-62a1-4363-a68c-29376de5c3f4
 ```
 
-2. **Checkout the feature branch**
+2. **Install dependencies**
 ```bash
-git checkout blitzy-7a9ac453-8306-4ecc-a0d2-339da18e69cd
-```
-
-### Dependency Installation
-
-```bash
-# Install all dependencies
 npm install
 ```
 
-**Expected Output:**
+3. **Verify installation**
+```bash
+npm audit
+# Expected: found 0 vulnerabilities
+
+npm list --depth=0
+# Expected: Lists express, helmet, cors, express-rate-limit, express-validator
 ```
-added 282 packages in 3s
+
+4. **Configure environment (optional)**
+```bash
+cp .env.example .env
+# Edit .env as needed for your environment
 ```
 
 ### Running the Application
 
-**Start the server:**
+**Development mode (security enabled)**:
 ```bash
 npm start
 # or
 node server.js
 ```
 
-**Expected Output:**
+**Development mode (security disabled - NOT for production)**:
+```bash
+SECURITY_ENABLED=false node server.js
+```
+
+**Expected output**:
 ```
 Server running at http://127.0.0.1:3000/
 ```
 
-### Verification Steps
+### Running Tests
 
-1. **Test the root endpoint:**
-```bash
-curl http://127.0.0.1:3000/
-```
-**Expected Output:** `Hello, World!`
-
-2. **Test the evening endpoint:**
-```bash
-curl http://127.0.0.1:3000/evening
-```
-**Expected Output:** `Good evening`
-
-3. **Run the test suite:**
+**Run all tests**:
 ```bash
 npm test
+# or for CI environment
+CI=true npm test -- --watchAll=false
 ```
-**Expected Output:** `Tests: 79 passed, 79 total`
 
-### Example API Usage
+**Expected output**:
+```
+Test Suites: 2 passed, 2 total
+Tests:       111 passed, 111 total
+```
 
+### Verification Steps
+
+1. **Verify server starts**:
 ```bash
-# Hello World endpoint
-curl -i http://127.0.0.1:3000/
-# Response: HTTP/1.1 200 OK
-# Body: Hello, World!
+node server.js &
+curl http://127.0.0.1:3000/
+# Expected: Hello, World!
+```
+
+2. **Verify security headers**:
+```bash
+curl -I http://127.0.0.1:3000/
+# Expected: Content-Security-Policy, X-Frame-Options, etc.
+# NOT expected: X-Powered-By
+```
+
+3. **Verify rate limiting**:
+```bash
+curl -I http://127.0.0.1:3000/ | grep RateLimit
+# Expected: RateLimit header present
+```
+
+4. **Stop server**:
+```bash
+pkill -f "node server.js"
+```
+
+### Example Usage
+
+**Basic API requests**:
+```bash
+# Root endpoint
+curl http://127.0.0.1:3000/
+# Response: Hello, World!
 
 # Evening endpoint
-curl -i http://127.0.0.1:3000/evening
-# Response: HTTP/1.1 200 OK
-# Body: Good evening
+curl http://127.0.0.1:3000/evening
+# Response: Good evening
 
-# 404 for unknown routes
-curl -i http://127.0.0.1:3000/unknown
-# Response: HTTP/1.1 404 Not Found
+# Check all response headers
+curl -i http://127.0.0.1:3000/
+```
+
+**Environment variable configuration**:
+```bash
+# Allow specific CORS origins
+CORS_ORIGINS=http://localhost:3001,https://myapp.com node server.js
+
+# Adjust rate limiting
+RATE_LIMIT=200 RATE_WINDOW_MS=60000 node server.js
 ```
 
 ---
 
 ## Human Tasks Remaining
 
-| # | Task | Priority | Severity | Hours | Description |
-|---|------|----------|----------|-------|-------------|
-| 1 | Fix Jest version mismatch | Low | Low | 0.5 | Update package.json to align Jest version with installed (30.2.0 vs ^29.7.0) |
-| **Total** | | | | **0.5** | |
+### High Priority Tasks
 
-### Task Details
+| # | Task | Hours | Severity | Action Steps |
+|---|------|-------|----------|--------------|
+| 1 | Final Security Review | 1.0 | High | Review CSP directives for your use case; validate all 13 security headers are appropriate; test with security scanning tools |
 
-#### Task 1: Fix Jest Version Mismatch
-**Priority:** Low | **Severity:** Low | **Estimated Hours:** 0.5
+### Medium Priority Tasks
 
-**Issue:** The installed Jest version (30.2.0) doesn't match package.json specification (^29.7.0). Tests pass but npm ls shows a warning.
+| # | Task | Hours | Severity | Action Steps |
+|---|------|-------|----------|--------------|
+| 2 | SSL Certificate Setup | 2.0 | Medium | Generate or obtain SSL certificates; set SSL_KEY_PATH and SSL_CERT_PATH in .env; set HTTPS_ENABLED=true; implement HTTPS server wrapper in server.js if not using reverse proxy |
+| 3 | Production Env Configuration | 1.5 | Medium | Set CORS_ORIGINS with allowed production domains; adjust RATE_LIMIT and RATE_WINDOW_MS for production traffic; review and set all security environment variables |
 
-**Action Steps:**
-1. Open `package.json`
-2. Update `"jest": "^29.7.0"` to `"jest": "^30.2.0"` in devDependencies
-3. Run `npm install` to regenerate package-lock.json
-4. Verify with `npm ls --depth=0`
+### Low Priority Tasks
+
+| # | Task | Hours | Severity | Action Steps |
+|---|------|-------|----------|--------------|
+| 4 | CI/CD Pipeline Setup | 1.5 | Low | Create GitHub Actions workflow for automated testing; add npm audit to CI pipeline; configure deployment automation |
+
+### Total Remaining Hours: 6.0
 
 ---
 
 ## Risk Assessment
 
 ### Technical Risks
+
 | Risk | Severity | Likelihood | Mitigation |
 |------|----------|------------|------------|
-| Jest version mismatch | Low | Confirmed | Update package.json version spec |
+| CSP too restrictive for future features | Low | Medium | Review and adjust CSP directives when adding new resources |
+| Rate limit too restrictive | Low | Low | Monitor and adjust RATE_LIMIT via environment variables |
+| HTTPS not implemented | Medium | Medium | Add https module wrapper or use reverse proxy (nginx) |
 
 ### Security Risks
-| Risk | Severity | Status |
-|------|----------|--------|
-| Dependency vulnerabilities | N/A | ✅ 0 vulnerabilities found |
-| ReDoS in routing | Low | ✅ Express 5.x has built-in protection |
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| SSL certificates not configured | Medium | High | Implement HTTPS before production deployment |
+| CORS origins not configured | Low | High | Set CORS_ORIGINS before external access |
+| Default rate limits may need tuning | Low | Medium | Monitor traffic and adjust limits |
 
 ### Operational Risks
-| Risk | Severity | Status |
-|------|----------|--------|
-| Server fails to start | N/A | ✅ Validated - starts successfully |
-| Endpoints return wrong data | N/A | ✅ Validated - all responses correct |
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| No monitoring/alerting | Low | High | Implement logging and monitoring solution |
+| No health check endpoint | Low | Medium | Add /health endpoint for load balancer |
+| Environment variables not set | Medium | Medium | Use .env.example as template, validate on startup |
 
 ### Integration Risks
-| Risk | Severity | Status |
-|------|----------|--------|
-| Backward compatibility | N/A | ✅ Root endpoint preserved |
-| External dependencies | Low | Express.js is stable, well-maintained |
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| Frontend CORS blocked | Low | Medium | Configure CORS_ORIGINS for frontend domains |
+| Rate limiting affects legitimate traffic | Low | Low | Implement IP whitelisting for trusted sources |
 
 ---
 
-## Project Configuration
+## Dependencies Added
 
-### Server Configuration
-| Setting | Value |
-|---------|-------|
-| Hostname | 127.0.0.1 |
-| Port | 3000 |
-| Framework | Express.js 5.2.1 |
+| Package | Version | Purpose | Weekly Downloads |
+|---------|---------|---------|------------------|
+| helmet | ^8.1.0 | Security HTTP headers | 2,000,000+ |
+| cors | ^2.8.5 | CORS middleware | 21,686 dependents |
+| express-rate-limit | ^8.2.1 | Rate limiting | 10,000,000+ |
+| express-validator | ^7.3.1 | Input validation | 1,278,706 |
 
-### API Endpoints
-| Method | Path | Response | Status |
-|--------|------|----------|--------|
-| GET | `/` | `Hello, World!\n` | 200 OK |
-| GET | `/evening` | `Good evening` | 200 OK |
-| * | `/*` | HTML error page | 404 Not Found |
+All dependencies are actively maintained and have no known vulnerabilities.
 
-### Dependencies
-**Production:**
-- express@^5.2.1
+---
 
-**Development:**
-- jest@^29.7.0
-- supertest@^7.1.0
+## Configuration Reference
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| SECURITY_ENABLED | true | Master toggle for all security middleware |
+| HTTPS_ENABLED | false | Enable HTTPS server |
+| SSL_KEY_PATH | ./certs/key.pem | Path to SSL private key |
+| SSL_CERT_PATH | ./certs/cert.pem | Path to SSL certificate |
+| CORS_ORIGINS | (empty/deny all) | Comma-separated allowed origins |
+| RATE_WINDOW_MS | 900000 | Rate limit window (15 min) |
+| RATE_LIMIT | 100 | Max requests per window per IP |
+
+### Security Headers (Helmet.js)
+
+| Header | Value | Purpose |
+|--------|-------|---------|
+| Content-Security-Policy | Restrictive defaults | Prevents XSS and injection |
+| X-Frame-Options | SAMEORIGIN | Prevents clickjacking |
+| X-Content-Type-Options | nosniff | Prevents MIME sniffing |
+| Strict-Transport-Security | max-age=31536000 | Enforces HTTPS |
+| X-DNS-Prefetch-Control | off | Privacy protection |
+| X-Download-Options | noopen | IE download protection |
+| X-Permitted-Cross-Domain-Policies | none | Flash/PDF policy |
+| Referrer-Policy | no-referrer | Privacy protection |
+| Cross-Origin-Opener-Policy | same-origin | Isolates browsing context |
+| Cross-Origin-Resource-Policy | same-origin | Controls resource loading |
+| Origin-Agent-Cluster | ?1 | Process isolation |
+| X-Powered-By | REMOVED | Prevents fingerprinting |
 
 ---
 
 ## Conclusion
 
-The Express.js integration has been successfully completed with all requirements from the Agent Action Plan implemented and validated. The project is 95% complete, with only a minor package version alignment task remaining (0.5 hours).
+The Express.js security hardening project has been successfully implemented with all in-scope requirements completed. The application now includes:
 
-**Recommendations:**
-1. Fix the Jest version mismatch before merging (low priority)
-2. Consider adding error handling middleware for production use (out of scope)
-3. Consider environment-based configuration for port/hostname (out of scope)
+1. **13 security headers** via Helmet.js protecting against common web vulnerabilities
+2. **CORS protection** with restrictive defaults and configurable origins
+3. **Rate limiting** to prevent DoS attacks
+4. **Input validation infrastructure** ready for future endpoint enhancements
 
-The codebase is production-ready for a tutorial/learning project with comprehensive test coverage ensuring reliability.
+All 111 tests pass (79 original + 32 new security tests), and npm audit shows 0 vulnerabilities. The remaining 6 hours of work primarily involves production deployment configuration that was explicitly out of scope in the original plan.
+
+**Recommendation**: Before production deployment, complete the SSL certificate setup and configure environment variables for your specific production requirements.
